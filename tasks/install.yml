@@ -32,6 +32,10 @@
     classic: yes
     channel: "{{ microk8s_version }}"
 
+- name: Start microk8s
+  become: yes
+  command: microk8s start
+
 - name: Wait for microk8s to be ready
   become: yes
   command: microk8s.status --wait-ready
