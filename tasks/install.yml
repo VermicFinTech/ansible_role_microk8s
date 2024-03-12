@@ -45,7 +45,17 @@
       - "'This MicroK8s deployment is acting as a node in a cluster.' not in mk8sstatusout.stdout_lines"
       - mk8sstatusout.rc > 0
 
+- name: Install k9s
+  become:
+  snap:
+    name: k9s
 
+- name: Create k9s softlink
+  file:
+    src: /snap/k9s/current/bin/k9s
+    dest: /snap/bin/k9s
+    state: link
+    
 - name: Create kubectl alias
   become: yes
   command: "snap alias microk8s.kubectl kubectl"
